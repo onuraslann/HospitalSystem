@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -23,6 +24,12 @@ namespace Business.Concrete
         [ValidationAspect(typeof(DoctorValidator))]
         public IResult Add(Doctor doctor)
         {
+
+            IResult result = BusinessRules.Run(CheckIfDepartmanCount(doctor.DepartmanId));
+            if (result != null)
+            {
+                return result;
+            }
             _doctorDal.Add(doctor);
             return new SuccessResult(Messages.DoctorAdded);
         }
@@ -30,6 +37,15 @@ namespace Business.Concrete
         public IDataResult<List<Doctor>> GetAll()
         {
             return new SuccessDataResult<List<Doctor>>(_doctorDal.GetAll());
+        }
+        private IResult CheckIfDepartmanCount(int departmanId)
+        {
+            var result = _doctorDal.GetAll(x => x.DepartmanId == departmanId).Count;
+            if (result > 5)
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
         }
     }
 }

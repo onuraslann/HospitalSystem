@@ -11,5 +11,6 @@ namespace Business.Constants
         public static string AppointmentAdded = "Randevu başarılı bir şekilde oluşturuldu";
         public static string AppointmentDeleted = "Randevu silindi";
         public static string SickAdded = "Hasta eklendi";
+        public static string CheckIfTcExist = "Tc numarası aynı olamaz";
     }
 }
