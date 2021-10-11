@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,7 +17,7 @@ namespace Business.Concrete
         {
             _departmanDal = departmanDal;
         }
-
+        [SecuredOperation("admin,editor")]
         public IResult Add(Departman departman)
         {
             _departmanDal.Add(departman);

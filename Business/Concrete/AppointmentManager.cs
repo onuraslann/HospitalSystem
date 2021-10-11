@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -18,6 +19,7 @@ public AppointmentManager(IAppointmentDal appointmentDal)
             _appointmentDal = appointmentDal;
         }
 
+        [SecuredOperation("admin,editor")]
         public IResult Add(Appointment appointment)
         {
             appointment.AppointmentDate = DateTime.Now;

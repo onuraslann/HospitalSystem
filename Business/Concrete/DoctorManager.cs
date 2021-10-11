@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Validation;
@@ -20,7 +21,7 @@ namespace Business.Concrete
         {
             _doctorDal = doctorDal;
         }
-
+        [SecuredOperation("admin,editor")]
         [ValidationAspect(typeof(DoctorValidator))]
         public IResult Add(Doctor doctor)
         {

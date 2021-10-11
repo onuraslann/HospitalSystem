@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Validation;
@@ -22,6 +23,7 @@ namespace Business.Concrete
             _sickDal = sickDal;
         }
 
+        [SecuredOperation("admin,editor")]
         [ValidationAspect(typeof(SickValidator))]
         public IResult Add(Sick sick)
         {

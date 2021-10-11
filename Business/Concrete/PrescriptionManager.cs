@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -17,7 +18,7 @@ namespace Business.Concrete
         {
             _prescriptionDal = prescriptionDal;
         }
-
+        [SecuredOperation("admin,editor")]
         public IResult Add(Prescription prescription)
         {
             prescription.PrescriptionsDate = DateTime.Now;
