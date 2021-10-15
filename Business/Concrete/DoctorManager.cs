@@ -2,6 +2,7 @@
 using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Caching;
 using Core.Aspects.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
@@ -35,6 +36,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DoctorAdded);
         }
 
+        [CacheAspect]
         public IDataResult<List<Doctor>> GetAll()
         {
             return new SuccessDataResult<List<Doctor>>(_doctorDal.GetAll());

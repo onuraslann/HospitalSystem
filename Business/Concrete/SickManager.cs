@@ -2,6 +2,7 @@
 using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Caching;
 using Core.Aspects.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
@@ -25,6 +26,7 @@ namespace Business.Concrete
 
         [SecuredOperation("admin,editor")]
         [ValidationAspect(typeof(SickValidator))]
+        [CacheRemoveAspect("ISickService.Get")]
         public IResult Add(Sick sick)
         {
             IResult result = BusinessRules.Run(CheckIfTcExist(sick.Tc), CheckIfTelephoneNoExist(sick.Phone));
@@ -36,6 +38,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.SickAdded);
         }
 
+        [CacheAspect]
         public IDataResult<List<Sick>> GetAll()
         {
             return new SuccessDataResult<List<Sick>>(_sickDal.GetAll());
