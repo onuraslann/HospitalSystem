@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Departman departman)
         {
-            var result = _departmanService.GetAll();
+            var result = _departmanService.Add(departman);
             if (result.Success)
             {
                 return Ok(result);
