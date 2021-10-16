@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects;
 using Business.Constants;
+using Core.Aspects.Performance;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -31,7 +32,7 @@ namespace Business.Concrete
             _prescriptionDal.Delete(prescription);
             return new SuccessResult();
         }
-
+        [PerformanceAspect(interval: 1)]
         public IDataResult<List<Prescription>> GetAll()
         {
             return new SuccessDataResult<List<Prescription>>(_prescriptionDal.GetAll());

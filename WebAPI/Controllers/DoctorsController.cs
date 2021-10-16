@@ -39,5 +39,15 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        [HttpPost("transaction")]
+        public IActionResult Transactions(Doctor doctor)
+        {
+            var result = _doctorService.CheckIfTransaction(doctor);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

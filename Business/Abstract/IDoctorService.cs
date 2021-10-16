@@ -10,5 +10,7 @@ namespace Business.Abstract
     {
         IResult Add(Doctor doctor);
         IDataResult<List<Doctor>> GetAll();
+        IResult Update(Doctor doctor);
+        IResult CheckIfTransaction(Doctor doctor);
     }
 }

@@ -12,6 +12,7 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(d => d.FirstName).MaximumLength(2);
             RuleFor(d => d.LastName).NotEmpty();
+            RuleFor(d => d.Age > 28);
         }
     }
 }

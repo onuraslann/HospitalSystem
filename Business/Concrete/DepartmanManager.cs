@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects;
 using Core.Aspects.Caching;
+using Core.Aspects.Performance;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,6 +21,7 @@ namespace Business.Concrete
         }
         [SecuredOperation("admin,editor")]
         [CacheRemoveAspect("IDepartmanService.Get")]
+        [PerformanceAspect(interval:1)]
         public IResult Add(Departman departman)
         {
             _departmanDal.Add(departman);
@@ -27,6 +29,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        [PerformanceAspect(interval: 1)]
         public IDataResult<List<Departman>> GetAll()
         {
             return new SuccessDataResult<List<Departman>>(_departmanDal.GetAll());
